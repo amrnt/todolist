@@ -19,6 +19,7 @@
 <% if user_signed_in? %>
   <p>
     Welcome <%= current_user.email %> |
+    <%= link_to "Your lists", lists_path %> |
     <%= link_to "Edit profile", edit_user_registration_path %> |
     <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
   </p>

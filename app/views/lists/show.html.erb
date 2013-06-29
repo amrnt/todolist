@@ -1,0 +1,34 @@
+<h3>List: <%= @list.title %></h3>
+
+<% if user_signed_in? %>
+<p>
+  <%= link_to "Edit", edit_list_path(@list) %> |
+  <%= link_to "Destroy", @list, method: :delete, confirm: "Are you sure?" %>
+</p>
+<% end %>
+
+<% unless @tasks.count == 0 %>
+  <ul>
+  <% @tasks.each do |t| %>
+    <!-- <li></li> -->
+    <%= content_tag_for(:li, t) do %>
+      <b><%= t.title %></b> —
+      <small><%= t.is_done ? "Done" : "Not Yet!" %></small> —
+      <small><%= link_to "edit", edit_list_task_path(@list, t) %> </small> -
+      <small><%= link_to "delete", list_task_path(@list, t), method: :delete, confirm: "Are you sure?" %> </small>
+    <% end %>
+  <% end %>
+  </ul>
+<% else %>
+  No tasks for this list
+<% end %>
+
+
+<hr />
+
+<%= simple_form_for([@list, Task.new], html: {class: 'form-horizontal'}) do |f| %>
+  <%= f.input :title, required: true %>
+  <%= f.button :submit, :class => 'btn-primary' %>
+<% end %>
+
+

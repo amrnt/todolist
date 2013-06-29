@@ -11,7 +11,27 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130629092225) do
+ActiveRecord::Schema.define(:version => 20130629130134) do
+
+  create_table "lists", :force => true do |t|
+    t.string   "title"
+    t.boolean  "is_public"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "lists", ["user_id"], :name => "index_lists_on_user_id"
+
+  create_table "tasks", :force => true do |t|
+    t.string   "title"
+    t.boolean  "is_done"
+    t.integer  "list_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "tasks", ["list_id"], :name => "index_tasks_on_list_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false

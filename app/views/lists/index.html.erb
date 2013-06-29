@@ -1,0 +1,26 @@
+<h3>Your Lists</h3>
+<% unless @lists.count == 0 %>
+  <ul>
+  <% @lists.each do |l| %>
+    <!-- <li></li> -->
+    <%= content_tag_for(:li, l) do %>
+      <%= link_to l.title, l %> —
+      <small><%= l.is_public ? "Public" : "Private" %> </small>
+    <% end %>
+  <% end %>
+  </ul>
+<% else %>
+  No lists for now
+<% end %>
+
+<hr />
+
+<%= simple_form_for(current_user.lists.new, html: {class: 'form-horizontal'}) do |f| %>
+  <%= f.input :title, required: true %>
+  <%= f.input :is_public %>
+  <%= f.button :submit, :class => 'btn-primary' %>
+<% end %>
+
+
+
+

@@ -10,5 +10,7 @@ class User < ActiveRecord::Base
                     :full_name
 
   validates :full_name, :presence => true
+
+  has_many :lists, dependent: :destroy
   # attr_accessible :title, :body
 end

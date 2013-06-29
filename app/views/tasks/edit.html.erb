@@ -1,0 +1,9 @@
+<h3>Tasks#edit</h3>
+
+<%= simple_form_for([@list, @task], html: {class: 'form-horizontal'}) do |f| %>
+  <%= f.input :title, required: true %>
+  <%= f.input :is_done %>
+  <%= f.button :submit, :class => 'btn-primary' %>
+<% end %>
+
+
